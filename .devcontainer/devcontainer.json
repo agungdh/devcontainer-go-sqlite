@@ -1,0 +1,26 @@
+{
+  "name": "Go (Debian 13)",
+  "image": "ghcr.io/agungdh/devcontainer-go-sqlite:latest",
+  "remoteUser": "agungdh",
+  "overrideCommand": false,
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+    "source=${localWorkspaceFolder}/.devcontainer/.gitignore_global,target=/home/agungdh/.gitignore_global,type=bind,readonly"
+  ],
+  "containerEnv": {
+    "SHELL": "/bin/bash",
+    "GOTOOLCHAIN": "auto"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-azuretools.vscode-docker",
+        "editorconfig.editorconfig"
+      ]
+    }
+  },
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/${localWorkspaceFolderBasename} && git config --global core.excludesFile /home/agungdh/.gitignore_global"
+}
