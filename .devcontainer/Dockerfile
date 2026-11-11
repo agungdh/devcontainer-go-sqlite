@@ -114,11 +114,18 @@ ENV PATH=/home/${USERNAME}/.opencode/bin:$PATH
 # ---------------------------------------------------------------------------
 RUN bash -c '. "${NVM_DIR}/nvm.sh" \
     && npm install -g npm@latest \
-    && npm i -g command-code@latest'
+    && npm i -g command-code@latest \
+    && npm update -g'
+
+# ---------------------------------------------------------------------------
+# Claude Code
+# ---------------------------------------------------------------------------
+RUN curl -fsSL https://claude.ai/install.sh | bash
+ENV PATH=/home/${USERNAME}/.local/bin:$PATH
 
 # Login shell (/etc/profile) me-reset PATH, jadi daftarkan ulang via profile.d
 USER root
-RUN PROFILE_PATH="/home/${USERNAME}/.opencode/bin:/home/${USERNAME}/go/bin:/usr/local/go/bin" \
+RUN PROFILE_PATH="/home/${USERNAME}/.local/bin:/home/${USERNAME}/.opencode/bin:/home/${USERNAME}/go/bin:/usr/local/go/bin" \
     && echo "export PATH=\"${PROFILE_PATH}:\$PATH\"" \
         | tee /etc/profile.d/devcontainer-path.sh > /dev/null \
     && echo "export NVM_DIR=\"${NVM_DIR}\"; [ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\"" \
