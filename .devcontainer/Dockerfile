@@ -19,8 +19,6 @@ RUN apt-get update \
         openssh-client \
         gnupg \
         sudo \
-        build-essential \
-        pkg-config \
         make \
         jq \
         unzip \
