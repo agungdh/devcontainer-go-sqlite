@@ -109,6 +109,13 @@ RUN curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh |
 RUN curl -fsSL https://opencode.ai/v2/install | bash
 ENV PATH=/home/${USERNAME}/.opencode/bin:$PATH
 
+# ---------------------------------------------------------------------------
+# Global npm packages
+# ---------------------------------------------------------------------------
+RUN bash -c '. "${NVM_DIR}/nvm.sh" \
+    && npm install -g npm@latest \
+    && npm i -g command-code@latest'
+
 # Login shell (/etc/profile) me-reset PATH, jadi daftarkan ulang via profile.d
 USER root
 RUN PROFILE_PATH="/home/${USERNAME}/.opencode/bin:/home/${USERNAME}/go/bin:/usr/local/go/bin" \
