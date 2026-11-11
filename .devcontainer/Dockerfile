@@ -99,7 +99,7 @@ RUN printf '%s\n' \
 # opencode
 # ---------------------------------------------------------------------------
 USER ${USERNAME}
-RUN curl -fsSL https://opencode.ai/install | bash
+RUN curl -fsSL https://opencode.ai/v2/install | bash
 ENV PATH=/home/${USERNAME}/.opencode/bin:$PATH
 
 # Login shell (/etc/profile) me-reset PATH, jadi daftarkan ulang via profile.d
