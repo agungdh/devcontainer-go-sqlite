@@ -3,6 +3,7 @@
   "image": "ghcr.io/agungdh/devcontainer-go-sqlite:latest",
   "remoteUser": "agungdh",
   "overrideCommand": false,
+  "runArgs": ["--network=host"],
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
   "mounts": [
