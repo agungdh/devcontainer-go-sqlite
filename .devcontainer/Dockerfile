@@ -96,18 +96,18 @@ RUN printf '%s\n' \
     && chmod +x /usr/local/share/docker-init.sh
 
 # ---------------------------------------------------------------------------
-# opencode
-# ---------------------------------------------------------------------------
-USER ${USERNAME}
-RUN curl -fsSL https://opencode.ai/v2/install | bash
-ENV PATH=/home/${USERNAME}/.opencode/bin:$PATH
-
-# ---------------------------------------------------------------------------
 # Node (nvm + Node.js 24)
 # ---------------------------------------------------------------------------
+USER ${USERNAME}
 ENV NVM_DIR=/home/${USERNAME}/.nvm
 RUN curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash \
     && bash -c '. "${NVM_DIR}/nvm.sh" && nvm install 24 && nvm alias default 24'
+
+# ---------------------------------------------------------------------------
+# opencode
+# ---------------------------------------------------------------------------
+RUN curl -fsSL https://opencode.ai/v2/install | bash
+ENV PATH=/home/${USERNAME}/.opencode/bin:$PATH
 
 # Login shell (/etc/profile) me-reset PATH, jadi daftarkan ulang via profile.d
 USER root
