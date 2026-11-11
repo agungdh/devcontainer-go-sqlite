@@ -21,7 +21,7 @@ Awalnya image ini mencakup PHP, Java, Go, dan Rust sekaligus, tapi ukurannya jad
 | Base | `debian:13` (trixie) |
 | Go | `golang-go` dari apt + `GOTOOLCHAIN=auto` |
 | SQLite | `sqlite3` CLI |
-| Node.js | Node 24 lewat `nvm` (`~/.nvm`), plus `npm@latest` dan `command-code` sebagai global package |
+| Node.js | Node 24 lewat `nvm` (`~/.nvm`), plus global package: `npm@latest`, `command-code`, `serve`, `concurrently` |
 | Docker CLI | `docker-ce-cli`, `buildx`, `compose` (daemon pakai socket host) |
 | opencode | v2, terpasang di `~/.opencode/bin` |
 | Claude Code | Installer resmi, launcher di `~/.local/bin` |

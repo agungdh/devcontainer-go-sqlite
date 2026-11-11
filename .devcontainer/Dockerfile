@@ -114,7 +114,7 @@ ENV PATH=/home/${USERNAME}/.opencode/bin:$PATH
 # ---------------------------------------------------------------------------
 RUN bash -c '. "${NVM_DIR}/nvm.sh" \
     && npm install -g npm@latest \
-    && npm i -g command-code@latest \
+    && npm i -g command-code@latest serve concurrently \
     && npm update -g'
 
 # ---------------------------------------------------------------------------
