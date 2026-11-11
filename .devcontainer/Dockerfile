@@ -102,11 +102,20 @@ USER ${USERNAME}
 RUN curl -fsSL https://opencode.ai/v2/install | bash
 ENV PATH=/home/${USERNAME}/.opencode/bin:$PATH
 
+# ---------------------------------------------------------------------------
+# Node (nvm + Node.js 24)
+# ---------------------------------------------------------------------------
+ENV NVM_DIR=/home/${USERNAME}/.nvm
+RUN curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash \
+    && bash -c '. "${NVM_DIR}/nvm.sh" && nvm install 24 && nvm alias default 24'
+
 # Login shell (/etc/profile) me-reset PATH, jadi daftarkan ulang via profile.d
 USER root
 RUN PROFILE_PATH="/home/${USERNAME}/.opencode/bin:/home/${USERNAME}/go/bin:/usr/local/go/bin" \
     && echo "export PATH=\"${PROFILE_PATH}:\$PATH\"" \
-        | tee /etc/profile.d/devcontainer-path.sh > /dev/null
+        | tee /etc/profile.d/devcontainer-path.sh > /dev/null \
+    && echo "export NVM_DIR=\"${NVM_DIR}\"; [ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\"" \
+        | tee /etc/profile.d/nvm.sh > /dev/null
 
 WORKDIR /workspaces
 
