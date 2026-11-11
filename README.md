@@ -21,8 +21,11 @@ Awalnya image ini mencakup PHP, Java, Go, dan Rust sekaligus, tapi ukurannya jad
 | Base | `debian:13` (trixie) |
 | Go | `golang-go` dari apt + `GOTOOLCHAIN=auto` |
 | SQLite | `sqlite3` CLI |
+| Node.js | Node 24 lewat `nvm` (`~/.nvm`), plus `npm@latest` dan `command-code` sebagai global package |
 | Docker CLI | `docker-ce-cli`, `buildx`, `compose` (daemon pakai socket host) |
-| opencode | Terpasang di `~/.opencode/bin` |
+| opencode | v2, terpasang di `~/.opencode/bin` |
+| Claude Code | Installer resmi, launcher di `~/.local/bin` |
+| Command Code | CLI `command-code`, settings dari `.devcontainer/commandcode-settings.json` |
 | User | `agungdh` (UID/GID 1000), sudo tanpa password |
 | Workspace | `/workspaces/<nama-folder-repo>` |
 
@@ -56,14 +59,17 @@ Tanpa host networking, port yang di-publish sibling container hanya menempel di 
 
 ```
 .devcontainer/
-  Dockerfile          # definisi image
-  devcontainer.json   # konfigurasi container, mount, ekstensi
-  .gitignore_global   # di-mount sebagai core.excludesFile
+  Dockerfile                    # definisi image
+  devcontainer.json             # konfigurasi container, mount, ekstensi
+  commandcode-settings.json     # di-copy ke ~/.commandcode/settings.json
+  .gitignore_global             # di-mount sebagai core.excludesFile
 .github/workflows/
-  devcontainer.yml    # build & push image ke GHCR
+  devcontainer.yml              # build & push image ke GHCR
 ```
 
 `.gitignore_global` mengabaikan folder editor/agent (`.claude/`, `.vscode/`, `.idea`, `.zed`, `.commandcode/`, `.DS_Store`) supaya tidak ikut ter-commit di repo mana pun.
+
+`postCreateCommand` menyiapkan git (`safe.directory` + `core.excludesFile`) dan menyalin `commandcode-settings.json` ke `~/.commandcode/settings.json`, jadi mesin baru tidak perlu konfigurasi manual.
 
 ## Mengubah environment
 
