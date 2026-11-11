@@ -18,7 +18,9 @@
       "extensions": [
         "golang.go",
         "ms-azuretools.vscode-docker",
-        "editorconfig.editorconfig"
+        "ms-azuretools.vscode-containers",
+        "editorconfig.editorconfig",
+        "eamodio.gitlens"
       ]
     }
   },
