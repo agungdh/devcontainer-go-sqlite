@@ -25,5 +25,5 @@
       ]
     }
   },
-  "postCreateCommand": "git config --global --add safe.directory /workspaces/${localWorkspaceFolderBasename} && git config --global core.excludesFile /home/agungdh/.gitignore_global"
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/${localWorkspaceFolderBasename} && git config --global core.excludesFile /home/agungdh/.gitignore_global && mkdir -p /home/agungdh/.commandcode && cp /workspaces/${localWorkspaceFolderBasename}/.devcontainer/commandcode-settings.json /home/agungdh/.commandcode/settings.json"
 }
